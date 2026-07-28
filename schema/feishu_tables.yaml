@@ -1,0 +1,80 @@
+# ============================================================
+# Feishu Base Table Structures
+# ============================================================
+# Current production database on Feishu (飞书多维表格).
+# base_token: [REDACTED]
+
+database:
+  name: "素材拆解分析系统 — 飞书Base"
+  platform: "feishu"
+  base_token: "[REDACTED]"
+  table_count: 10
+
+tables:
+  - name: "素材主表"
+    table_id: "tblrjnWVj9yJwreB"
+    fields: 32
+    description: "核心表，每条素材一行"
+
+  - name: "AI分析结果"
+    table_id: "tblNyyHI4nFhl6aQ"
+    fields: 28
+    description: "AI 标签分析输出"
+
+  - name: "逐帧拆解"
+    table_id: "tblSSwX14UkYlytk"
+    fields: 10
+    description: "视频逐帧内容记录"
+
+  - name: "标签字典"
+    table_id: "tblGukljxPXieW1c"
+    fields: 6
+    description: "标签定义参考"
+
+  - name: "效果聚合"
+    table_id: "tblPHmTzGV5cBCbO"
+    fields: 11
+    description: "按维度汇总投放指标"
+
+  - name: "游戏背景库"
+    table_id: "tbl6pBNByhtyMcRC"
+    fields: 18
+    description: "游戏元数据（世界观、玩法、美术风格等）"
+
+  - name: "AppsFlyer应用与查询口径"
+    table_id: "tblnEL7xGupXHgIT"
+    fields: 12
+    description: "API 配置与查询参数"
+
+  - name: "素材与AppsFlyer映射"
+    table_id: "tbla6UqLJBoZPIlq"
+    fields: 15
+    description: "素材名 ↔ AppsFlyer campaign 关联"
+
+  - name: "AppsFlyer日效果"
+    table_id: "tbl3mQId98o6Uafq"
+    fields: 15
+    description: "每日投放效果数据"
+
+  - name: "运行日志"
+    table_id: "tblO5PlfpzRVsM1n"
+    fields: 8
+    description: "脚本/Bot 执行记录"
+
+data_layers:
+  - layer: "本地事实库"
+    storage: "SQLite"
+    path: "data/mova_materials.sqlite3"
+    description: "完整事实、映射、原始结果和可追溯数据"
+
+  - layer: "飞书Base"
+    storage: "Feishu Base"
+    description: "团队需要查看、补充、筛选和协作的显性内容"
+
+  - layer: "AppsFlyer"
+    storage: "External API"
+    description: "投放效果数据，不替代素材内容识别"
+
+  - layer: "NocoDB"
+    storage: "NocoDB (legacy)"
+    description: "只保留历史迁移和备份用途，不再作为新功能入口"

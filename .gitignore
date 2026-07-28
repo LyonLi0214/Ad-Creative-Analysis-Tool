@@ -1,0 +1,66 @@
+# ── Secrets & credentials (NEVER commit these) ──
+.env
+.mova-secrets.env
+*.pem
+*.key
+
+# ── Python ──
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+.venv-recognition/
+*.egg-info/
+dist/
+build/
+
+# ── Media & video files (too large for git) ──
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+downloads/
+downloads/**/*
+
+# ── ML Model weights ──
+.models/
+*.safetensors
+*.bin
+*.onnx
+
+# ── Data & databases ──
+data/
+*.sqlite3
+*.sqlite
+*.db
+appsflyer_data/
+
+# ── Generated analysis output ──
+*.json
+!feishu_bot/tools_config.json
+!*.ipynb
+recognition_outputs/
+batch_analysis/
+stage_report/
+temp/
+workflow_report.html
+dashboard*.html
+MOVA_Insight_Report.html
+analysis_result.json
+
+# ── Logs ──
+logs/
+*.log
+
+# ── IDE & OS ──
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ── Refactoring helper (delete after use) ──
+_refactor_paths.py

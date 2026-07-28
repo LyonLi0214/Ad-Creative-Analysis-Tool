@@ -1,0 +1,28 @@
+# ==================== Ad Creative Analysis Tool ====================
+# Core analysis
+requests>=2.31.0
+oss2>=2.18.0
+PyYAML>=6.0
+openpyxl>=3.1.0
+numpy>=2.0.0
+opencv-python-headless>=4.8.0
+imageio-ffmpeg>=0.5.0
+
+# Web server (progress panel)
+Flask>=3.0.0
+Jinja2>=3.1.0
+click>=8.1.0
+
+# HTTP + API
+httpx>=0.27.0
+requests-toolbelt>=1.0.0
+
+# SSH deployment
+paramiko>=3.4.0
+
+# Feishu Bot
+lark-oapi>=1.6.0
+
+# Tooling
+python-dotenv>=1.0.0
+tqdm>=4.66.0

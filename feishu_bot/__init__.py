@@ -1,0 +1,1 @@
+"""MOVA Feishu bot package."""

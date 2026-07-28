@@ -1,0 +1,116 @@
+# ============================================================
+# Excel Template Specification — 5-Sheet 素材拆解分析模板
+# ============================================================
+# The standardized Excel workbook used as both input and output
+# for the analysis pipeline.
+
+template:
+  filename: "素材拆解分析模板.xlsx"
+  total_sheets: 5
+
+sheets:
+  - id: overview
+    name: "素材总览"
+    role: "input"
+    description: "投放数据输入表，从广告平台导出的原始数据"
+    columns:
+      - 素材名称
+      - 游戏名称
+      - 平台
+      - 类型
+      - Campaign
+      - 链接
+      - 入库时间
+      - 状态
+      - 上传人
+      - 花费
+      - 点击率
+      - 安装
+      - 转化率
+      - 单价
+      - 首充用户
+      - 首充率
+      - 首日回收
+      - 单个付费用户成本
+      - 首日ROI
+      - 累计付费
+      - 累计ROI
+      - 次留
+      - 时长
+      - 分辨率
+      - 备注
+
+  - id: timeline
+    name: "逐帧拆解"
+    role: "output"
+    description: "视频逐帧/逐段的内容拆解输出"
+    columns:
+      - 素材名称
+      - 游戏名称
+      - 时间轴
+      - 画面内容
+      - 画面元素
+      - 文案/字幕
+      - 音效
+      - 目的
+      - 可借鉴点
+
+  - id: summary
+    name: "总结分析"
+    role: "output"
+    description: "AI 四维拆解 + 6维标签的综合分析输出"
+    columns:
+      - 素材名称
+      - 游戏名称
+      - 素材类型
+      - Hook内容
+      - Hook类型
+      - 人物
+      - UI元素
+      - 特效
+      - 色彩
+      - 字幕
+      - 节奏
+      - BGM
+      - 核心卖点
+      - hook_策略
+      - 角色元素
+      - 场景元素
+      - 制作方式
+      - 叙事模式
+      - 画面风格
+      - 目标受众
+      - 情绪触发
+      - 营销策略
+      - 可优化方向
+      - 标签状态
+      - AI置信度
+      - 分析时间
+      - 人工批注
+
+  - id: dictionary
+    name: "标签字典"
+    role: "reference"
+    description: "6维标签的完整字典值定义"
+    columns:
+      - 游戏名称
+      - 维度
+      - 标签值
+      - 说明
+      - 示例素材
+
+  - id: aggregation
+    name: "效果聚合"
+    role: "output"
+    description: "按维度和标签值聚合的投放效果指标"
+    columns:
+      - 游戏名称
+      - 分析维度
+      - 标签值
+      - 素材数
+      - 平均花费
+      - 平均单价
+      - 平均首日ROI
+      - 平均累计ROI
+      - 平均次留
+      - 结论

@@ -1,0 +1,161 @@
+# ============================================================
+# Label System — 6维标签体系
+# ============================================================
+# Complete definition of the 6-dimension tagging taxonomy used
+# to classify ad creatives. Each dimension has a fixed set of
+# label values with descriptions and examples.
+
+label_system:
+  name: "6维标签体系"
+  version: "1.0"
+  total_labels: 50
+
+dimensions:
+  - id: hook_strategy
+    name: "hook_策略"
+    description: "素材开头的注意力抓取策略"
+    order: 1
+    labels:
+      - value: "反常识标题"
+        description: "用反直觉/反预期的标题或开场制造好奇"
+        example: "千万别下载这个游戏"
+      - value: "教学攻略"
+        description: "以教程/攻略的形式开头，暗示看完有收获"
+        example: "教你三分钟速通"
+      - value: "福利展示"
+        description: "直接展示登录福利、礼包码等"
+        example: "登录就送100抽"
+      - value: "擦边/角色吸引"
+        description: "用角色立绘、身材、性感元素吸引注意"
+        example: "性感角色开场特写"
+      - value: "剧情/抓马"
+        description: "用剧情冲突、戏剧化场景开场"
+        example: "女主角被背叛后觉醒"
+      - value: "口播推荐"
+        description: "真人或虚拟人直接面对镜头推荐"
+        example: "大家好，今天给大家推荐一款..."
+      - value: "问题型标题"
+        description: "抛出问题引发用户共鸣和好奇"
+        example: "你最讨厌哪种队友？"
+      - value: "选择互动"
+        description: "让用户做选择，制造参与感"
+        example: "选左边还是右边？"
+      - value: "福利激励"
+        description: "强调限时奖励、倒计时等紧迫感"
+        example: "仅限今天，错过就没"
+      - value: "核心玩法展示"
+        description: "直接展示游戏核心玩法的精彩片段"
+        example: "开场就是Boss战"
+      - value: "来电钩子"
+        description: "模拟来电/消息通知等系统界面"
+        example: "手机震动，收到神秘短信"
+      - value: "定制互动"
+        description: "让用户感觉自己被定制/被选中"
+        example: "这是为你量身定做的阵容"
+      - value: "噱头/爆点"
+        description: "用夸张视觉效果或爆炸性信息开场"
+        example: "全服唯一的神器现世"
+
+  - id: character
+    name: "角色元素"
+    description: "素材中出现的角色类型"
+    order: 2
+    labels:
+      - value: "黑皮"
+        description: "深色皮肤角色"
+      - value: "猫耳/兽耳"
+        description: "带有猫耳/兽耳等萌属性的角色"
+      - value: "Q版角色"
+        description: "Q版/二头身等可爱风格角色"
+      - value: "多角色"
+        description: "同时出现三个及以上角色"
+      - value: "立绘展示"
+        description: "角色立绘静态展示"
+      - value: "真人出镜"
+        description: "真实人类出镜"
+      - value: "AI虚拟人"
+        description: "AI生成的虚拟人形象"
+      - value: "无角色"
+        description: "没有角色出现的素材"
+
+  - id: scene
+    name: "场景元素"
+    description: "素材中出现的主要场景类型"
+    order: 3
+    labels:
+      - value: "弹球/战斗"
+        description: "弹球玩法或战斗场景"
+      - value: "选择界面"
+        description: "游戏中的选择/选项界面"
+      - value: "Boss战"
+        description: "Boss战斗场景"
+      - value: "胜利结算"
+        description: "胜利/通关结算画面"
+      - value: "福利界面"
+        description: "福利领取/抽奖界面"
+      - value: "模拟UI"
+        description: "模拟手机/系统界面（非游戏内）"
+      - value: "直播间"
+        description: "模拟直播场景"
+
+  - id: production
+    name: "制作方式"
+    description: "素材的制作方法"
+    order: 4
+    labels:
+      - value: "K帧动画"
+        description: "逐帧手绘/Spine动画"
+      - value: "真人口播"
+        description: "真实人物口播录制"
+      - value: "AI口播"
+        description: "AI生成的口播视频"
+      - value: "实机录屏"
+        description: "游戏实际录屏画面"
+      - value: "图片轮播"
+        description: "多张图片切换"
+      - value: "混合"
+        description: "多种制作方式混合"
+
+  - id: narrative
+    name: "叙事模式"
+    description: "素材的整体叙事结构"
+    order: 5
+    labels:
+      - value: "问题-解法"
+        description: "提出痛点 → 展示解决方案"
+      - value: "反差逆袭"
+        description: "从弱到强的逆袭故事"
+      - value: "攻略教学"
+        description: "以教程形式传递信息"
+      - value: "角色推荐"
+        description: "角色向用户推荐游戏"
+      - value: "悬念-揭秘"
+        description: "制造悬念 → 揭示答案"
+      - value: "福利直给"
+        description: "直接展示福利内容"
+      - value: "选项驱动"
+        description: "用户选择驱动剧情"
+      - value: "擦边吸引"
+        description: "通过擦边内容吸引注意"
+      - value: "角色展示"
+        description: "以角色展示为核心"
+      - value: "聊天模拟"
+        description: "模拟聊天/社交场景"
+
+  - id: visual_style
+    name: "画面风格"
+    description: "素材的整体视觉风格"
+    order: 6
+    labels:
+      - value: "二次元精致渲染"
+        description: "高精度二次元渲染风格"
+      - value: "Q版可爱风"
+        description: "Q版可爱卡通风格"
+      - value: "AI合成"
+        description: "AI生成的图像/视频风格"
+      - value: "实机录屏"
+        description: "真实游戏画面风格"
+      - value: "实拍"
+        description: "真实拍摄素材"
+      - value: "混剪"
+        description: "多种风格混合剪辑"

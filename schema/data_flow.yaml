@@ -1,0 +1,106 @@
+# ============================================================
+# Data Flow — 视频分析流水线
+# ============================================================
+# End-to-end data processing pipeline for ad creative analysis.
+
+pipeline:
+  name: "素材拆解分析管道"
+  concurrency: 6
+  description: |
+    从 OSS 下载素材 → ffmpeg 提取元数据和关键帧
+    → opencv 分析视觉特征 → AI 四维拆解 → 写回存储
+
+stages:
+  - id: download
+    name: "OSS 下载"
+    description: "从阿里云 OSS 下载视频/图片素材到本地"
+    input: "OSS Bucket (mova-eu-game-uxd)"
+    output: "本地 downloads/ 目录"
+    tools:
+      - oss2 SDK
+
+  - id: metadata
+    name: "ffmpeg 元数据提取"
+    description: "提取视频时长、分辨率、编码、FPS、音频信息"
+    input: "下载的 mp4/图片文件"
+    output: "元数据字典"
+    tools:
+      - imageio-ffmpeg
+
+  - id: keyframes
+    name: "关键帧提取"
+    description: "I帧优先提取，不足则均匀采样"
+    input: "视频文件 + 元数据"
+    output: "关键帧图片 (frame_001.jpg, ...)"
+    tools:
+      - ffmpeg
+
+  - id: visual_analysis
+    name: "opencv 视觉分析"
+    description: "分析关键帧的亮度、复杂度、主色调、色彩直方图"
+    input: "关键帧图片"
+    output: "视觉特征数据"
+    tools:
+      - opencv-python-headless
+      - numpy
+
+  - id: prompt_building
+    name: "Prompt 构建"
+    description: "将元数据 + 视觉特征 + 投放数据 + 标签库组装为 AI prompt"
+    input: "元数据 + 视觉特征 + 投放数据 + label_schema.yaml"
+    output: "AI 分析 prompt"
+    components:
+      - 视频元数据（时长、分辨率、FPS）
+      - 视觉特征（主色调、亮度、复杂度）
+      - 投放指标（花费、CTR、ROI）
+      - 标签字典（6维标签可选值）
+
+  - id: ai_analysis
+    name: "Mimo AI 四维拆解"
+    description: "调用 Mimo API 进行四维拆解 + 6维标签分类"
+    input: "Prompt"
+    output: "结构化分析结果 JSON"
+    api:
+      endpoint: "https://token-plan-cn.xiaomimimo.com/v1"
+      model: "mimo-v2.5-pro"
+      max_tokens: 4000
+
+  - id: persistence
+    name: "写入存储"
+    description: "并行写入 Excel + NocoDB/飞书Base"
+    output_locations:
+      - "素材拆解分析模板.xlsx → 总结分析 sheet"
+      - "素材拆解分析模板.xlsx → 逐帧拆解 sheet"
+      - "NocoDB → AI分析结果表"
+      - "NocoDB → 逐帧拆解表"
+      - "飞书Base → AI分析结果表"
+      - "飞书Base → 逐帧拆解表"
+
+workflow:
+  name: "完整工作流"
+  steps: |
+    1.xlsx (投放数据)
+        ↓ import_data.py
+    Excel 素材总览 (97条)
+        ↓ analyze_parallel.py (6并发)
+        ├── OSS 下载视频/图片
+        ├── ffmpeg 提取元数据 + 关键帧
+        ├── opencv 分析视觉特征
+        ├── Mimo AI 四维拆解
+        └── 写回 Excel + NocoDB
+        ↓
+    Excel 总结分析 + 逐帧拆解
+    NocoDB AI分析结果 + 逐帧拆解
+        ↓
+    进度面板 http://server
+    NocoDB http://server/nc/
+
+parallel_execution:
+  description: "6 并发 Worker 调度"
+  worker_pool: 6
+  per_worker:
+    - "OSS 下载（去重缓存）"
+    - "ffmpeg 元数据 + 关键帧"
+    - "opencv 视觉分析"
+    - "AI 分析（串行调用 Mimo API）"
+    - "写入 Excel + NocoDB"

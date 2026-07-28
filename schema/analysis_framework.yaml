@@ -1,0 +1,101 @@
+# ============================================================
+# Analysis Framework — 四维拆解框架
+# ============================================================
+# This defines the core analytical lens used for all ad creatives.
+# Each creative is decomposed across four orthogonal dimensions.
+
+framework:
+  name: "四维拆解框架"
+  version: "1.0"
+  description: >
+    每条素材按四个维度进行系统性拆解，覆盖从注意力抓取到转化引导的全链路。
+
+dimensions:
+  - id: hook
+    name: "前3秒·钩子"
+    english: "Hook (First 3 Seconds)"
+    order: 1
+    focus:
+      - "视觉冲击 — 第一眼抓住注意力的视觉元素"
+      - "听觉锚点 — BGM、音效、口播开头"
+      - "文案悬念 — 标题/字幕如何制造好奇"
+    questions:
+      - "开头用了什么手段吸引注意力？"
+      - "是视觉冲击、听觉刺激还是文案悬念？"
+      - "目标用户看到前3秒会停下来吗？"
+
+  - id: core
+    name: "核心卖点·主体"
+    english: "Core Value Proposition"
+    order: 2
+    focus:
+      - "玩法展示 — 战斗/养成/策略等核心玩法实机"
+      - "心理诉求 — 收集/竞争/放松/社交等"
+      - "角色情感 — 角色共鸣、IP吸引力"
+    questions:
+      - "主体部分展示了什么核心卖点？"
+      - "是玩法展示还是情感驱动？"
+      - "用户看完是否理解游戏是什么类型的？"
+
+  - id: audiovisual
+    name: "视听语言·包装"
+    english: "Audiovisual Packaging"
+    order: 3
+    focus:
+      - "节奏设计 — 剪辑节奏、转场、信息密度"
+      - "风格调性 — 画面风格、色调、整体质感"
+      - "文化适配 — 语言、本地化元素、文化符号"
+    questions:
+      - "画面风格和BGM是否统一？"
+      - "节奏是否匹配目标市场的偏好？"
+      - "整体制作质量给人什么印象？"
+
+  - id: cta
+    name: "转化路径·CTA"
+    english: "Conversion Path / CTA"
+    order: 4
+    focus:
+      - "CTA类型 — 安装/预约/试玩等"
+      - "文案 — CTA文案是否紧迫/明确"
+      - "位置 — CTA出现时机和位置"
+    questions:
+      - "结尾用什么方式引导转化？"
+      - "CTA文案是否有紧迫感或明确指引？"
+      - "是否给用户足够的理由去点击？"
+
+output_fields:
+  - category: "拆解维度"
+    fields:
+      - Hook内容
+      - Hook类型
+      - 人物
+      - UI元素
+      - 特效
+      - 色彩
+      - 字幕
+      - 节奏
+      - BGM
+      - 核心卖点
+
+  - category: "6维标签"
+    fields:
+      - hook_策略
+      - 角色元素
+      - 场景元素
+      - 制作方式
+      - 叙事模式
+      - 画面风格
+
+  - category: "扩展维度"
+    fields:
+      - 目标受众
+      - 情绪触发
+      - 营销策略
+      - 可优化方向
+
+  - category: "AI元数据"
+    fields:
+      - AI置信度
+      - 标签状态
+      - 分析时间
+      - 人工批注

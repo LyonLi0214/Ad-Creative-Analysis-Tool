@@ -1,0 +1,268 @@
+# ============================================================
+# NocoDB Table Structures
+# ============================================================
+# Reference schema for the legacy NocoDB database.
+# 5 data tables + 1 log table.
+
+database:
+  name: "素材拆解分析库 NocoDB"
+  type: "nocodb"
+  base_id: "pjg5uoh4uqz2xhp"
+
+tables:
+  - id: mt35rdj4l214v6x
+    name: "素材主表"
+    description: "核心表，每条素材一行 — 包含投放指标和状态追踪"
+    columns:
+      - name: 素材名称
+        type: SingleLineText
+        key: primary
+        description: "素材唯一标识，如 V_心动_20260116_..."
+      - name: 游戏名称
+        type: SingleLineText
+        description: "心动防线、王室風流史 等"
+      - name: 平台
+        type: SingleLineText
+        description: "Google/FB"
+      - name: 类型
+        type: SingleLineText
+        description: "视频/图片"
+      - name: Campaign
+        type: SingleLineText
+        description: "投放活动名称"
+      - name: 链接
+        type: URL
+        description: "素材链接"
+      - name: 入库时间
+        type: DateTime
+        description: "录入时间"
+      - name: 状态
+        type: SingleLineText
+        description: "待分析/AI已分析/人工确认/已上线/已淘汰"
+      - name: 上传人
+        type: SingleLineText
+      - name: 花费
+        type: Decimal
+        description: "广告花费（美元）"
+      - name: 点击率
+        type: Decimal
+        description: "CTR"
+      - name: 安装
+        type: Number
+        description: "安装数"
+      - name: 转化率
+        type: Decimal
+      - name: 单价
+        type: Decimal
+        description: "CPI（美元）"
+      - name: 首充用户
+        type: Number
+      - name: 首充率
+        type: Decimal
+      - name: 首日回收
+        type: Decimal
+        description: "首日回收（美元）"
+      - name: 单个付费用户成本
+        type: Decimal
+      - name: 首日ROI
+        type: Decimal
+        description: "D1 ROI"
+      - name: 累计付费
+        type: Decimal
+      - name: 累计ROI
+        type: Decimal
+      - name: 次留
+        type: Decimal
+        description: "次日留存率"
+      - name: 时长
+        type: Decimal
+        description: "视频时长（秒）"
+      - name: 分辨率
+        type: SingleLineText
+        description: "如 720x1280"
+      - name: 备注
+        type: LongText
+
+  - id: mitt7nrv1t74e2l
+    name: "AI分析结果"
+    description: "AI 四维拆解 + 6维标签的分析输出"
+    columns:
+      - name: 素材名称
+        type: SingleLineText
+        key: foreign
+        references: 素材主表.素材名称
+      - name: 游戏名称
+        type: SingleLineText
+      - name: 素材类型
+        type: SingleLineText
+        description: "视频/图片"
+      - name: Hook内容
+        type: LongText
+        description: "前3秒钩子具体内容"
+      - name: Hook类型
+        type: SingleLineText
+        description: "原始hook分类"
+      - name: 人物
+        type: LongText
+        description: "出现的角色/人物描述"
+      - name: UI元素
+        type: LongText
+        description: "游戏UI元素"
+      - name: 特效
+        type: LongText
+        description: "视觉特效"
+      - name: 色彩
+        type: SingleLineText
+        description: "主色调/配色方案"
+      - name: 字幕
+        type: SingleLineText
+        description: "字幕使用情况"
+      - name: 节奏
+        type: LongText
+        description: "整体节奏描述"
+      - name: BGM
+        type: SingleLineText
+        description: "背景音乐类型"
+      - name: 核心卖点
+        type: LongText
+        description: "素材主打的卖点"
+      - name: hook_策略
+        type: SingleLineText
+        description: "6维标签1"
+      - name: 角色元素
+        type: SingleLineText
+        description: "6维标签2"
+      - name: 场景元素
+        type: SingleLineText
+        description: "6维标签3"
+      - name: 制作方式
+        type: SingleLineText
+        description: "6维标签4"
+      - name: 叙事模式
+        type: SingleLineText
+        description: "6维标签5"
+      - name: 画面风格
+        type: SingleLineText
+        description: "6维标签6"
+      - name: 目标受众
+        type: SingleLineText
+        description: "逗号分隔"
+      - name: 情绪触发
+        type: SingleLineText
+        description: "逗号分隔"
+      - name: 营销策略
+        type: LongText
+        description: "整体营销策略描述"
+      - name: 可优化方向
+        type: LongText
+        description: "改进建议"
+      - name: 标签状态
+        type: SingleLineText
+        description: "AI建议/已确认/待审"
+      - name: AI置信度
+        type: Decimal
+        description: "0.0-1.0"
+      - name: AI原始输出
+        type: LongText
+        description: "完整JSON输出"
+      - name: 分析时间
+        type: DateTime
+      - name: 人工批注
+        type: LongText
+
+  - id: mev72vvwyl3gzyy
+    name: "逐帧拆解"
+    description: "视频逐帧/逐段的内容拆解记录"
+    columns:
+      - name: 素材名称
+        type: SingleLineText
+        references: 素材主表.素材名称
+      - name: 游戏名称
+        type: SingleLineText
+      - name: 时间轴
+        type: SingleLineText
+        description: "如 0:00-0:03"
+      - name: 画面内容
+        type: LongText
+        description: "该时间段发生了什么"
+      - name: 画面元素
+        type: LongText
+        description: "角色/UI/特效等具体元素"
+      - name: 文案/字幕
+        type: LongText
+        description: "出现的文字内容"
+      - name: 音效
+        type: SingleLineText
+        description: "BGM/音效/口播"
+      - name: 目的
+        type: LongText
+        description: "这段的设计目的"
+      - name: 可借鉴点
+        type: LongText
+        description: "可以学习借鉴的地方"
+
+  - id: mygnsarpik40mig
+    name: "标签字典"
+    description: "6维标签的完整字典值定义"
+    columns:
+      - name: 游戏名称
+        type: SingleLineText
+        description: "通用/具体游戏名"
+      - name: 维度
+        type: SingleLineText
+        description: "hook_策略/角色元素/场景元素/制作方式/叙事模式/画面风格"
+      - name: 标签值
+        type: SingleLineText
+        description: "具体标签"
+      - name: 说明
+        type: LongText
+        description: "标签定义"
+      - name: 示例素材
+        type: SingleLineText
+
+  - id: m0teuvp3lv8g5r8
+    name: "效果聚合"
+    description: "按维度和标签值聚合的投放效果指标"
+    columns:
+      - name: 游戏名称
+        type: SingleLineText
+      - name: 分析维度
+        type: SingleLineText
+        description: "按哪个维度聚合"
+      - name: 标签值
+        type: SingleLineText
+        description: "具体标签值"
+      - name: 素材数
+        type: Number
+      - name: 平均花费
+        type: Decimal
+      - name: 平均单价
+        type: Decimal
+      - name: 平均首日ROI
+        type: Decimal
+      - name: 平均累计ROI
+        type: Decimal
+      - name: 平均次留
+        type: Decimal
+      - name: 结论
+        type: SingleLineText
+        description: "✅继续/⚠️观察/❌放弃"
+
+  - id: mjxu0e9j0dmd2yv
+    name: "运行日志"
+    description: "脚本/Bot 执行操作日志"
+    columns:
+      - name: 时间
+        type: SingleLineText
+        description: "日志时间"
+      - name: 操作
+        type: SingleLineText
+        description: "操作类型"
+      - name: 详情
+        type: LongText
+        description: "详细信息"
+      - name: 状态
+        type: SingleLineText
+        description: "成功/失败"
+      - name: 耗时
+        type: SingleLineText

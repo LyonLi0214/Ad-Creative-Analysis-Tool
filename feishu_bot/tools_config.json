@@ -1,0 +1,19 @@
+{
+  "_base_token_note": "Set FEISHU_BASE_TOKEN in .env instead of here",
+  "base_url": "https://dreametech.feishu.cn/base/",
+  "tables": {
+    "素材主表": "tblrjnWVj9yJwreB",
+    "AI分析结果": "tblNyyHI4nFhl6aQ",
+    "逐帧拆解": "tblSSwX14UkYlytk",
+    "标签字典": "tblGukljxPXieW1c",
+    "效果聚合": "tblPHmTzGV5cBCbO",
+    "游戏背景库": "tbl6pBNByhtyMcRC",
+    "AppsFlyer应用与查询口径": "tblnEL7xGupXHgIT",
+    "素材与AppsFlyer映射": "tbla6UqLJBoZPIlq",
+    "AppsFlyer日效果": "tblWxSuO3zwfZZY8",
+    "运行日志": "tblO5PlfpzRVsM1n",
+    "素材表现排行": "tblD8tjxvItKsElO"
+  },
+  "material_table_id": "tblrjnWVj9yJwreB",
+  "material_table_name": "素材主表"
+}
